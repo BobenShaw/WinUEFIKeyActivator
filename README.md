@@ -20,5 +20,5 @@ Run the python script from a CMD or Batch
 Requirements
 -------------
 -Windows Vista or higher (32 or 64 bit)  
--Tested using Python 3.6.2
+-Tested using Python 3.6.2 
 -Run it as administrator for obvious reasons
