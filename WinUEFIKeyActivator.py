@@ -2,7 +2,7 @@ import sys
 import ctypes
 import ctypes.wintypes
 import os
-import time
+import subprocess
 
 #######################################################################################
 #                                                                                     #
@@ -89,12 +89,10 @@ try:
 	else:
 		print("I found your product key in BIOS!")
 		print(str(WindowsKey))
+		subprocess.call(["cscript", "//B", "C:\windows\system32\slmgr.vbs", "/ipk", WindowsKey])
 		print("Setting system key...")
-		call(["cscript", "C:\windows\system32\slmgr.vbs", "/ipk", WindowsKey])
-		print("Waiting for a sec before continuing...  (5 seconds to be precise!)")
-		time.sleep(5)
 		print("Attempting activation to Microsoft servers...")
-		call(["cscript", "C:\windows\system32\slmgr.vbs", "/ato"])
+		subprocess.call(["cscript", "//B", "C:\windows\system32\slmgr.vbs", "/ato"])
 		sys.exit(1)
 except:
 	sys.exit(1)
