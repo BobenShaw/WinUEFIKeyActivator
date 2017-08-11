@@ -1,14 +1,30 @@
 import sys
 import ctypes
 import ctypes.wintypes
+import os
+import time
 
-#####################################################
-#script to query windows 8.x OEM key from PC firmware
-#ACPI -> table MSDM -> raw content -> byte offset 56 to end
-#ck, 03-Jan-2014 (christian@korneck.de)
-#####################################################
+#######################################################################################
+#                                                                                     #
+# Original script by Christian Korneck (christian@korneck.de)                         #
+# Original repository located at: https://github.com/christian-korneck/get_win8key    #
+# Modifications for automation/verbosity by Bob Shaw (bob@shaw.pw)                    #
+# New repository is located at: https://github.com/IchBinAsuka/WinUEFIKeyActivator    #
+#                                                                                     #
+#######################################################################################
 
-#for ref: common STR to DWORD conversions: ACPI: 1094930505 - FIRM: 1179210317 - RSMB: 1381190978 - FACP: 1178682192 - PCAF: 1346584902 - MSDM: 1297302605 - MDSM  1296323405
+
+print("###########################################")
+print("#                                         #")
+print("#      Windows UEFI Key Activator         #")
+print("#                                         #")
+print("###########################################")
+print("")
+print("Source code available at: https://github.com/IchBinAsuka/WinBIOSKeyActivator")
+print("Make sure you're running this as administrator!")
+print("")
+print("Looking through BIOS for key...")
+print("")
 
 def EnumAcpiTables():
 #returns a list of the names of the ACPI tables on this system
@@ -60,16 +76,25 @@ def GetWindowsKey():
 		except:
 			return False
 	else:
-		print("[ERR] - ACPI table " + str(table) + " not found on this system")
 		return False
 	
 try:	
 	WindowsKey=GetWindowsKey()
 	if WindowsKey==False:
-		print("unexpected error")
+		print("No key found in BIOS!")
+		print("For models that shipped with Windows 7 and older, no key will be here.")
+		print("Take a look under your battery on the laptop, or on the side of the Desktop!")
+		print("Keep in mind Windows 7 keys should generally work with Windows 10")
 		sys.exit(1)
 	else:
+		print("I found your product key in BIOS!")
 		print(str(WindowsKey))
+		print("Setting system key...")
+		call(["cscript", "C:\windows\system32\slmgr.vbs", "/ipk", WindowsKey])
+		print("Waiting for a sec before continuing...  (5 seconds to be precise!)")
+		time.sleep(5)
+		print("Attempting activation to Microsoft servers...")
+		call(["cscript", "C:\windows\system32\slmgr.vbs", "/ato"])
+		sys.exit(1)
 except:
-	print("unexpected error")
 	sys.exit(1)
