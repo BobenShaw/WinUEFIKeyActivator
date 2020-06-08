@@ -8,8 +8,8 @@ import subprocess
 #                                                                                     #
 # Original script by Christian Korneck (christian@korneck.de)                         #
 # Original repository located at: https://github.com/christian-korneck/get_win8key    #
-# Modifications for automation/verbosity by Bob Shaw (bob@shaw.pw)                    #
-# New repository is located at: https://github.com/IchBinAsuka/WinUEFIKeyActivator    #
+# Modifications for automation/verbosity by Bob Shaw (thebobshaw@gmail.com)           #
+# New repository is located at: https://github.com/BobenShaw/WinUEFIKeyActivator      #
 #                                                                                     #
 #######################################################################################
 
@@ -20,7 +20,7 @@ print("#      Windows UEFI Key Activator         #")
 print("#                                         #")
 print("###########################################")
 print("")
-print("Source code available at: https://github.com/IchBinAsuka/WinUEFIKeyActivator")
+print("Source code available at: https://github.com/BobenShaw/WinUEFIKeyActivator")
 print("Make sure you're running this as administrator!")
 print("")
 print("Looking through BIOS for key...")
